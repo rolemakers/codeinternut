@@ -1,0 +1,15 @@
+
+## [Codeinternut]()
+ - [Gerador de Senhas](generatespassword)
+ - [Validador de E-mails](emailvalidate)
+ - [Impressão de Dados](print)
+ - [Envio de E-mails](sendmail)
+ - [Banco de Dados](banco)
+ - [Limpa Variáveis](clearstring)
+ - [Retornar IP](ip)
+ - [Resetar Array](resetarray)
+ - [Web Screenshots](webscreenshots)
+ - [Login](login)
+ 
+## [Catalogue]()
+ - [Catalogo de Máquinas](machines)
