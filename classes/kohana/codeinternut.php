@@ -2,7 +2,7 @@
 
 ///Leandro
 /**
- * CodeInternut— Códigos desenvolvidos para projetos rolemak.
+ * CodeInternut— Códigos desenvolvidos.
   *
  * @package    CodeInternut
  * @category   Base
@@ -46,6 +46,8 @@ class Kohana_Codeinternut{
 	{		
 		return get_class_methods(self::instance($param));
 	}	
+	
+	
 	
 }
 	  
