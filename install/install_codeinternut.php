@@ -1,70 +1,34 @@
 <?php
-		
-  /*
-  	INSTALL CODE INTERNUT
 
-  */
-  echo utf8_decode('<center><p>Web Team Rolemak - Instalador do modulo CodeInternut!</p></center>'); 
-  if($_SERVER['HTTP_HOST'] != 'www.zoje.com.br')
-  { 
-	 getContentUrl('modules/', 'http://www.zoje.com.br/soa/zipfiles/', 'codeinternut.zip',$unzip = true, $validate_cache = 1);
+  echo utf8_decode('<center><p>Web Team Rolemak - CodeInternut KOHANA !</p></center>'); 
+  
+  if(is_dir('modules/codeinternut'))
+  {
+	  echo utf8_decode('<center><p>Web Team Rolemak - Codeinternut já está instalado em sua aplicação!</p></center>'); 
   }
-  
-  
-  /*
-  	GET CONTENT URL
-  */
-  function getContentUrl($path_name = false, $url = false, $file_name = false, $unzip = false,$validate_cache=false)
-  {	  
+  else
+  {
+	shell_exec('wget https://github.com/rolemakers/codeinternut/archive/master.zip');
+	shell_exec('mv master.zip modules/master.zip');
 	
-	$folder_name = explode('.',$file_name);
-	
-	if(!file_exists($path_name))
-	{
-	  echo utf8_decode('A pasta de '.$path_name.' não foi encontrada, verifique e tente novamente!');
-	  exit;
-	}
-	elseif(is_dir($path_name.$folder_name[0].'/'))
-	{
-	  echo utf8_decode('<center><p>Web Team Rolemak - O módulo já foi instalado, as atualizações serão fornecidas diariamente de forma automática.!</p></center>');
-	  unlink($_SERVER['SCRIPT_FILENAME']);
-	  exit;
-	}
-
-	$ch = curl_init($url.$file_name);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);	
-	$data = curl_exec($ch);	
-	curl_close($ch);	
-	file_put_contents($path_name.$file_name, $data);
-	
-	//UNZIP	
-	if($unzip)
+	if (file_exists('modules/master.zip'))
 	{
 	  $zip = new ZipArchive;	
-	  if ($zip->open($path_name.$file_name) === TRUE)
+	  if ($zip->open('modules/master.zip') === TRUE)
 	  {	
-		  $zip->extractTo($path_name);
-		  $zip->close();
-	  }
-	  unlink($path_name.$file_name);	  
+		$folde_name = ($zip->statIndex(0));
+		$content_name = (substr($folde_name['name'],0, -1));
+		$zip->extractTo('modules');
+		$zip->close();
+	  }  
+	  shell_exec('mv modules/codeinternut-master modules/codeinternut && rm modules/master.zip');
 	}
-	shell_exec('cd '.$path_name.' && chmod 777 -R '.$folder_name[0]);
-	
-	
-	if(is_dir($path_name.$folder_name[0].'/'))
-	{	
-		echo utf8_decode('<center><p>Web Team Rolemak - Modulo instalado com sucesso!</p></center>');
-		unlink($_SERVER['SCRIPT_FILENAME']);
-		if(!file_exists('install_codeinternut.php'))
-		{
-			echo utf8_decode('<center><p>Web Team Rolemak - Arquivo de instalação excluido com sucesso!</p></center>');
-		}		
-	}
-	else
+	if(is_dir('modules/codeinternut'))
 	{
-		echo utf8_decode('<center><p>Web Team Rolemak - Desculpe houve alguma problema com a instalação, tente novamente mais tarde!</p></center>');
-	}
-	
+	  echo utf8_decode('<center><p>Web Team Rolemak - Codeinternut instalado com sucesso!</p></center>');
+	  echo utf8_decode('<center><p>Web Team Rolemak - Apague o arquivo instalador</p></center>');
+	  shell_exec('chmod 0555 -R modules/codeinternut');
+	}  
   }
-
+  
 ?>
