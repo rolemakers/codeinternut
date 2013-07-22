@@ -1,15 +1,36 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-/*dsdsds*/
-
-     
-// This line for update module in projects futures
-if($_SERVER['HTTP_HOST'] != 'www.zoje.com.br')
+/*
+	VERSIONAMENTO DO MODULE	
+*/
+$config = Kohana::$config->load('config')->as_array();
+foreach($config as $key => $val)
 {
-   shell_exec('chmod 0777 -R '.MODPATH.'codeinternut');
-   codeinternut::instance('url')->getContentUrl(MODPATH, 'http://www.zoje.com.br/soa/zipfiles/', 'codeinternut.zip',$unzip = true, $validate_cache = 86400,'init.php');
-   shell_exec('chmod 0555 -R '.MODPATH.'codeinternut');
-}
+  $request_configs[$key] = $val;
+}	
 
+$start_update = codeinternut::instance('files')->get_file_data(__FILE__,$request_configs['update_time']);
+if($request_configs['update_module'] && !$start_update)
+{
+  shell_exec('wget '.$request_configs['url_module'].'/'.$request_configs['file_name']);
+  shell_exec('mv '.DOCROOT.$request_configs['file_name'].' '.MODPATH.$request_configs['file_name']);
+  
+  if (file_exists(MODPATH.$request_configs['file_name']))
+  {
+	$zip = new ZipArchive;	
+	if ($zip->open(MODPATH.$request_configs['file_name']) === TRUE)
+	{	
+	  $folde_name = ($zip->statIndex(0));
+	  $content_name = (substr($folde_name['name'],0, -1));
+	  $zip->extractTo(MODPATH);
+	  $zip->close();
+	}  
+	if(is_dir(MODPATH.$content_name))
+	{
+	  shell_exec('rm -r '.MODPATH.$request_configs["module_name"].' && mv '.MODPATH.$content_name .' '.MODPATH.$request_configs["module_name"]);
+	  shell_exec('rm '.MODPATH.$request_configs['file_name'].'&& chmod 0555 -R '.MODPATH.$request_configs["module_name"]);
+	}
+  }  
+}
 
 /* 
  * The Module `init.php` file can perform additional environment setup, including adding routes.
