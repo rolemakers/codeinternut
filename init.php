@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /*
 	VERSIONAMENTO DO MODULE	
+	atualização do modulo para os projetos
 */
 $config = Kohana::$config->load('config')->as_array();
 foreach($config as $key => $val)
