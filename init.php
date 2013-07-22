@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-/*dsdsds*/
+/**/
 
      
 // This line for update module in projects futures
