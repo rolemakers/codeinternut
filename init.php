@@ -27,7 +27,7 @@ if($request_configs['update_module'] && !$start_update)
 	}  
 	if(is_dir(MODPATH.$content_name))
 	{
-	  shell_exec('chmod 0777 -R'.MODPATH.$request_configs["module_name"]);
+	  shell_exec('chmod 0777 -R '.MODPATH.$request_configs["module_name"]);
 	  shell_exec('rm -r '.MODPATH.$request_configs["module_name"].' && mv '.MODPATH.$content_name .' '.MODPATH.$request_configs["module_name"]);
 	  shell_exec('rm '.MODPATH.$request_configs['file_name'].'&& chmod 0555 -R '.MODPATH.$request_configs["module_name"]);
 	}
