@@ -6,7 +6,7 @@
 return array(
 
 	/**
-	* Variaveis para modulo
+	* Variaveis para este modulo
 	*/
 	
 	'update_module'      => true,
