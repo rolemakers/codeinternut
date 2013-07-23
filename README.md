@@ -6,7 +6,7 @@ Esse módulo foi criado pela WebTeam da Rolemak, com o intuito de organizar fun�
 
 Obs: Esse módulo é para utilização com framework kohana( testado na versão 3.2 ).
 
-1 - Faça o download do módulo [Download Codeinternut](https://github.com/rolemakers/codeinternut.git).
+1 - Faça o download do módulo [Download Codeinternut](https://github.com/rolemakers/codeinternut/archive/master.zip).
 
 2 - Para primeira instalação extraia do conteúdo zip o arquivo install/install_codeinternut.php e faça o upload desse arquivo na raiz de seu framework kohana.
 
