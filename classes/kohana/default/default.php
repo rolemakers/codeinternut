@@ -190,7 +190,35 @@ class Kohana_Default_Default
 	   }
 	   
 	  return $new_array;
-	} 	
+	}
+	
+	/**
+	* Função que possibilita limpar string que contenham tags e estilos inline.
+	* Um exemplo quando a tag <p style="color:red"></p>, a função elimina o style e mantem como <p></p>
+	*
+	* @string String a ser tratada
+	*
+	* @return String tratada
+	*/
+	
+	public function strip_data($string)
+	{
+		$options = array(
+		 '<div>'   => '<p>',
+		 '</div>'  => '</p>',
+		 '<h1>'    => '<p>',
+		 '</h1>'   => '</p>',
+		 '<ul>'    => '',
+		 '</ul>'   => '',
+		 '<li>'    => '<p>',
+		 '</li>'   => '</p>',
+		 '<p> </p>' => '',
+		);
+
+		$output = str_replace(array_keys($options), array_values($options), trim($string));
+		$output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $output);		
+		return $output;
+	}	
 	 
 	 
 	 
