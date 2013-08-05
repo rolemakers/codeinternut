@@ -197,7 +197,9 @@ class Kohana_Default_Default
 	* Um exemplo quando a tag <p style="color:red"></p>, a função elimina o style e mantem como <p></p>
 	*
 	* @string String a ser tratada
-	*
+	* Como usar: 
+	* $response = Codeinternut::instance('default')->strip_data($tring); 
+	
 	* @return String tratada
 	*/
 	
