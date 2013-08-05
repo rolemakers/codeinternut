@@ -217,8 +217,11 @@ class Kohana_Default_Default
 		 '<p> </p>' => '',
 		);
 
-		$output = str_replace(array_keys($options), array_values($options), $string);
-		$output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $output);		
+		$output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $string);
+		$output = preg_replace('/(<[^>]+) id=".*?"/i', '$1', $output);
+		$output = preg_replace('/(<[^>]+) class=".*?"/i', '$1', $output);
+		$output = str_replace(array_keys($options), array_values($options), $output);
+				
 		return $output;
 	}	
 	 
