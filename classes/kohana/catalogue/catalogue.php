@@ -51,7 +51,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		
 		foreach($variables['options'] as $key=>$values)
 		{
-		  ($values) ? $options .= '-'.$values : ''; 
+		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
 		}			
 	  }
 	  
@@ -104,7 +104,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	  {		
 		foreach($variables['options'] as $key=>$values)
 		{
-		  ($values) ? $options .= '-'.$values : ''; 
+		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
 		}			
 	  }
 	  
@@ -150,7 +150,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	  {		
 		foreach($variables['options'] as $key=>$values)
 		{
-		  ($values) ? $options .= '-'.$values : ''; 
+		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
 		}			
 	  }
 	  $file_name   = $variables['cache']['save_path'].__FUNCTION__.$options.'.txt';
