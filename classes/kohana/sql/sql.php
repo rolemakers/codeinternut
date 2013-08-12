@@ -158,8 +158,11 @@ class Kohana_Sql_Sql
 		  $response = DB::query(Database::SELECT, $sql)->execute($variables['database'])->as_array();			
 		}
 		
-		Codeinternut::instance('files')->record_array_file($file_name,$response);
-		$response = Codeinternut::instance('files')->read_array_file($file_name);
+		if(count($response))
+		{
+		   Codeinternut::instance('files')->record_array_file($file_name,$response);
+		   $response = Codeinternut::instance('files')->read_array_file($file_name);
+		}
 	  }
 	  
 	  return $response; 
