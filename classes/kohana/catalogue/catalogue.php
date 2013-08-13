@@ -207,7 +207,9 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		  }
 		}
 		
-		$response['rows']     = count($new_response['products']);
+		$response['rows']      = count($new_response['products']);
+		$response['trail']     = $soa_vallery['trail'] ? $soa_vallery['trail'] : '';
+		$response['Unity']     = $soa_vallery['Unity'] ? $soa_vallery['Unity'] : '';
 		$response['products'] = $new_response['products'];
 		Codeinternut::instance('files')->record_array_file($file_name,$response);		
 						
