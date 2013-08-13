@@ -142,10 +142,10 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	
 	
 	*/
-	public function merge_machines_zojebr($variables=array())
+public function merge_machines_zojebr($variables=array())
 	{
-		
-	  // *** Construindo o nome do arquivo com as opções de select *** //
+	  
+	  // tratando variáveis e criando nome do arquivo que armazena o cache da consulta.
 	  if($variables['options'])
 	  {		
 		foreach($variables['options'] as $key=>$values)
@@ -155,53 +155,65 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	  }
 	  $file_name   = $variables['cache']['save_path'].__FUNCTION__.$options.'.txt';
 	  
+	  // verificando a existência de um arquivo de cache e retornando seus valores.
 	  if($variables['cache']['active'])
 	  {		
-	  	$cache_file_time = Codeinternut::instance('files')->get_file_data($file_name,( $variables['life_time'] ?  $variables['life_time'] : 86400 ));
+		$cache_file_time = Codeinternut::instance('files')->get_file_data($file_name,( $variables['life_time'] ?  $variables['life_time'] : 86400 ));
 		if($cache_file_time)
 		{
-			$response = Codeinternut::instance('files')->read_array_file($file_name);		
+			$response = Codeinternut::instance('files')->read_array_file($file_name);
 		}
 	  }
 	  
+	  //fazendo a consulta e criando um arquivo cache para leitura futura.
 	  if(!count($response))
 	  {
-		// *** Vallery *** //
-		$soa_vallery = self::machines($variables);
 		
+		// resgatando dados do catalogo em vallery
+		$soa_vallery = Codeinternut::instance('catalogue')->machines($variables);
+		$changes_keys_v = array('e_'=> '');
 		foreach($soa_vallery['products'] as $keys=>$values)
-		{
-			$change_key_soa_valley[$values['e_modelo']] = $values;
+		{	
+		  foreach($values as $key_value=>$value_values)
+		  {  
+			$products['vallery'][$values['e_modelo']]['v_'.$this->strip_strings($changes_keys_v,$key_value)] = $value_values;
+		  }
 		}
 		
-		// ***Zoje BR *** //	
-		$soa_zojebr  = self::machinesZojeBr($variables = array(
-									  'options'=> array('limit' => false,'category' => false,'product'=> false,'internalcode' => false),
-									  'cache' => array('active' => true,'save_path' => APPPATH.'sql_cache/','life_time'=> 172800)
-									 ));
+		// resgatando dados do catalogo em zoje.br	
+		$soa_zojebr  = Codeinternut::instance('catalogue')->machinesZojeBr($variables = array(
+						  'options'=> array('limit' => false,'category' => false,'product'=> false,'internalcode' => false),
+						  'cache' => array('active' => true,'save_path' => APPPATH.'sql_cache/','life_time'=> 172800)
+						));
+		$changes_keys_z = array('p_'=>'', 'c_'=>'');			
 		foreach($soa_zojebr['products'] as $keys=>$values)
 		{
-		  $change_soa_zojebr[$values['p_internalcode']] = $values;
+		  foreach($values as $key_value=>$value_values)	
+		  {  
+			$products['zoje'][$values['p_internalcode']]['z_'.Codeinternut::instance('defaut')->strip_strings($changes_keys_z,$key_value)] = $value_values;
+		  }			
 		}
 		
-		// *** Merge Catalogo *** //
-		foreach($change_key_soa_valley as $key=>$value)
+		// Comparando chaves e efetuando o merge de das informações em seus respectivos arrays
+		foreach($products['vallery'] as $key=>$value)
 		{
-		  if(array_key_exists($key, $change_soa_zojebr))
+		  if(array_key_exists($key, $products['zoje']))
 		  {	
-			$new_response['products'][] = array_merge($change_key_soa_valley[$key], $change_soa_zojebr[$key]);
+			$new_response['products'][] = array_merge($products['vallery'][$key], $products['zoje'][$key]);
 		  }
 		  else
 		  {
 			$new_response['products'][] = $value;
 		  }
 		}
+		
 		$response['rows']     = count($new_response['products']);
 		$response['products'] = $new_response['products'];
-		Codeinternut::instance('files')->record_array_file($file_name,$response);
+		Codeinternut::instance('files')->record_array_file($file_name,$response);		
+						
 	  }
 
-	  return 	$response;			 	
+		return $response;	  
 	}
 	
 }
