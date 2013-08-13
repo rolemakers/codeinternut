@@ -190,7 +190,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		{
 		  foreach($values as $key_value=>$value_values)	
 		  {  
-			$products['zoje'][$values['p_internalcode']]['z_'.Codeinternut::instance('defaut')->strip_strings($changes_keys_z,$key_value)] = $value_values;
+			$products['zoje'][$values['p_internalcode']]['z_'.Codeinternut::instance('default')->strip_strings($changes_keys_z,$key_value)] = $value_values;
 		  }			
 		}
 		
