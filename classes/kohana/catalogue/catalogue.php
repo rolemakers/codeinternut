@@ -176,7 +176,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		{	
 		  foreach($values as $key_value=>$value_values)
 		  {  
-			$products['vallery'][$values['e_modelo']]['v_'.Codeinternut::instance('defaut')->strip_strings($changes_keys_v,$key_value)] = $value_values;
+			$products['vallery'][$values['e_modelo']]['v_'.Codeinternut::instance('default')->strip_strings($changes_keys_v,$key_value)] = $value_values;
 		  }
 		}
 		
@@ -215,5 +215,6 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 
 		return $response;	  
 	}
+	
 	
 }
