@@ -223,6 +223,28 @@ class Kohana_Default_Default
 		$output = str_replace(array_keys($options), array_values($options), $output);
 				
 		return $output;
+	}
+	
+	/**
+	* Função que possibilita limpar string que contenham algum caracterer a ser substituido
+	* Para o funcionamento é necesário passar como primeiro parametro dessa função uma array contendo as strings
+	* a serem substituidas exemplos chave = string a ser localiza e valor igual substituição.
+	* @string String a ser tratada
+	* Como usar: 
+	* $response = Codeinternut::instance('default')->strip_strings(array('e_'=>'','c_'=>'trocarpor'),$string); 
+	
+	* @return String tratada
+	*/
+	public function strip_strings($variables=false,$string=false)
+	{
+	  if($variables)
+	  {
+		foreach($variables as $key=>$values)
+		{	
+		  $string = str_ireplace($key,$values,$string);	  
+		}
+	  }
+	  return $string;
 	}	
 	 
 	 
