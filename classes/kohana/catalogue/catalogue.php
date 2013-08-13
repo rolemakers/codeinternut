@@ -86,7 +86,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 
  	 /** Catalogo Zoje BR
 	 *
-     * @variables      array    conjunto de variaveis para leitura do catalog SOA de Maquinas de Costura ZOJE BR
+     	* @variables      array    conjunto de variaveis para leitura do catalog SOA de Maquinas de Costura ZOJE BR
 	 * @return  Array 
 	 * 
 	 * Como Usar:
@@ -95,7 +95,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 									'options'=> array('limit' => false,'category' => false,'product'=> false,'internalcode' => false),
 									'cache' => array('active' => true,'save_path' => APPPATH.'sql_cache/','life_time'=> 172800)
 									));							  
-    */			
+    	*/			
 	public function machinesZojeBr($variables=array())
     	{		
 	  
@@ -176,7 +176,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		{	
 		  foreach($values as $key_value=>$value_values)
 		  {  
-			$products['vallery'][$values['e_modelo']]['v_'.$this->strip_strings($changes_keys_v,$key_value)] = $value_values;
+			$products['vallery'][$values['e_modelo']]['v_'.Codeinternut::instance('defaut')->strip_strings($changes_keys_v,$key_value)] = $value_values;
 		  }
 		}
 		
