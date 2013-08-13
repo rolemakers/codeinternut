@@ -97,7 +97,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 									));							  
     */			
 	public function machinesZojeBr($variables=array())
-    {		
+    	{		
 	  
 	  // Construindo o nome do arquivo com as opções de select	
 	  if($variables['options'])
@@ -142,7 +142,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	
 	
 	*/
-public function merge_machines_zojebr($variables=array())
+	public function merge_machines_zojebr($variables=array())
 	{
 	  
 	  // tratando variáveis e criando nome do arquivo que armazena o cache da consulta.
