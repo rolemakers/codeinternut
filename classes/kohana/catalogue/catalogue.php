@@ -49,6 +49,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 		
 		$variables['options'] = array_merge($variables['options'],$variables_fixed);
 		
+		$options = '';
 		foreach($variables['options'] as $key=>$values)
 		{
 		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
@@ -101,7 +102,8 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	  
 	  // Construindo o nome do arquivo com as opções de select	
 	  if($variables['options'])
-	  {		
+	  {	
+	  	$options = '';
 		foreach($variables['options'] as $key=>$values)
 		{
 		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
@@ -148,6 +150,7 @@ class Kohana_Catalogue_Catalogue extends Kohana_Catalogue_Categories
 	  // tratando variáveis e criando nome do arquivo que armazena o cache da consulta.
 	  if($variables['options'])
 	  {		
+	  	$options = '';
 		foreach($variables['options'] as $key=>$values)
 		{
 		  ($values) ? $options .= '-'.codeinternut::instance('default')->cleanString($values) : ''; 
