@@ -33,7 +33,7 @@ class Kohana_Default_Default
 		$exit = '';
 		$characters = '';
 		
-		$characters .= $lmin;
+		$characters .= $llower;
 		if ($uppercase) $characters .= $lupper;
 		if ($numbers) $characters .= $num;
 		if ($symbols) $characters .= $simb;
