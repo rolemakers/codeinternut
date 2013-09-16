@@ -8,21 +8,29 @@
  *
  * @package    Modulename
  * @category   Base
- * @author     Myself Team
+ * @author    Leandro Santana
  * @copyright  (c) 2012 Myself Team
  * @license    http://kohanaphp.com/license.html
  */
 class Controller_Codeinternut extends Controller {
 
     public function action_index()
-    {
-
-        // Instanciating the Module Class
-        $Modulename = new Modulename;
-
-        // Or Call a Statis Method
-        Modulename::show_text('Cool!');
-
+    {      	
+     
+	  $class      = Request::current()->post('class');
+	  $method     = Request::current()->post('method');
+	  $variables  = Request::current()->post('variables');	  
+	  	 
+	  if($class && $method)
+	  {
+	  	$return = Codeinternut::instance($class)->$method($variables);
+		echo $return;
+	  }
+	  else
+	  {
+	  	echo '<p>Métdo não encontrado.</p>';
+	  }
+	  
     }
-
-} // End Welcome
+ 
+}
