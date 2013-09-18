@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 /**
- * Products Rolemak
- * @package    Products Rolemak
+ * Files Functions
+ * @package    Files Functions
    @$url       Definido por padrão
  * @category   Base
  * @author     WebTeam Rolemak
@@ -81,6 +81,50 @@ class Kohana_Files_Files
 		  fclose($fd);
 		  chmod($file_name, 0777);
 		  return true;
-	  }	
+	  }
+	 
+	   /*
+		 Metódo utilizado para criar cache HTML para KOstache
+		 *
+		 * @ $variables array variaveis para uso da função.*
+		 * @return Array
+		 *
+		 *
+		 Como usar:
+		 $response = Codeinternut::instance('files')->kostache_cache(
+		 array(
+		 'content'  => 'Model_Index::GetTesteIndex()', // Função ou array em para uso no mustache, se for função passe como string usando ''
+		 'lifetime' => 30,                            // Tempo de duração do cache em segundos
+		 'cache_name'=>__FUNCTION__                  // nome do cache a ser armazenado na pasta padrão do modulo cache Kohana
+		 ));
+		 *
+	*/
+	
+	public function kostache_cache($variables)
+	{			
+		// trata a variável content, uma vez passada como string como um código php essa é tratada e retornada seu resultado original.
+		if(is_string($variables['content']))
+		{			
+			
+			$string_content = '$content  = '.$variables['content'].';';
+			eval($string_content);
+		}
+		else
+		{			
+			$content = $variables['content'];
+		}
+
+		// Busca por cache ativo ou cria um novo.
+		$KOstache_cache    = Cache::instance('file')->get($variables['cache_name']);	
+ 		if ($KOstache_cache)
+	  	{	
+			return $KOstache_cache;			
+		}
+		else
+		{			
+			Cache::instance('file')->set($variables['cache_name'], $content, $variables['lifetime']);			
+			return $content;
+		}			
+	}
 	  
 }
