@@ -128,14 +128,13 @@ class Kohana_Files_Files
 	}
 	
 	/*
-		Metódo utilizado para carregar cache rapidamente
+		Metódo utilizado para carregar Less Cache rapidamente
 		 *
-		 * @ $variables array variaveis para uso da função.*
-		 * @return Array
+		 * @ $file = nome do arquivo less
 		 *
 		 *
 		 Como usar:
-		 $response = Codeinternut::instance('files')->kostache_cache(DOCROOT. "assets/less/default");
+		 Codeinternut::instance('files')->kostache_cache(DOCROOT. "assets/less/default");
 	*/
 	public function lessCache($file=false){
 		if(file_exists($file.".less")){
