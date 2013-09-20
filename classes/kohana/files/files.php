@@ -126,5 +126,25 @@ class Kohana_Files_Files
 			return $content;
 		}			
 	}
+	
+	/*
+		Metódo utilizado para carregar cache rapidamente
+		 *
+		 * @ $variables array variaveis para uso da função.*
+		 * @return Array
+		 *
+		 *
+		 Como usar:
+		 $response = Codeinternut::instance('files')->kostache_cache(DOCROOT. "assets/less/default");
+	*/
+	public function lessCache($file=false){
+		if(file_exists($file.".less")){
+			$date1 = date(filemtime($file.".less"));
+			$date2 = date(filemtime($file.".css"));
+			if($date1+1500 > $date2){
+				Less::compile($file.".less");
+			}
+		}
+	}
 	  
 }
