@@ -134,7 +134,7 @@ class Kohana_Files_Files
 		 *
 		 *
 		 Como usar:
-		 Codeinternut::instance('files')->kostache_cache(DOCROOT. "assets/less/default");
+		 Codeinternut::instance('files')->lessCache(DOCROOT. "assets/less/default");
 	*/
 	public function lessCache($file=false){
 		if(file_exists($file.".less")){
