@@ -44,7 +44,7 @@
 			$this->timeout	= 5;
 			$this->status	= SMTP_STATUS_NOT_CONNECTED;
 			$this->host		= 'localhost';
-			$this->port		= 25;
+			$this->port		= 587;
 			$this->helo		= 'localhost';
 			$this->auth		= FALSE;
 			$this->user		= '';
