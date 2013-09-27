@@ -76,7 +76,7 @@ class Kohana_Mail_Mail
 	  $mailer->IsHTML(true);
 	  $mailer->From = $variables['from'];
 	  $mailer->FromName = $variables['fromname'];
-	  $mailer->Port     = 25;  
+	  $mailer->Port     = (!$this->port) ? 25 : $this->port;  
 	  
 	  if($variables['authentication'])
 	  {
