@@ -75,13 +75,13 @@ class Kohana_Mail_Mail
 	  $mailer->SetLanguage("br");
 	  $mailer->IsHTML(true);
 	  $mailer->From = $variables['from'];
-	  $mailer->FromName = $variables['fromname'];	
+	  $mailer->FromName = $variables['fromname'];
+	  $mailer->Port     = 25;  
 	  
 	  if($variables['authentication'])
 	  {
 		$mailer->SMTPAuth   = true;
 		$mailer->SMTPSecure = $this->SMTPSecure;
-		$mailer->Port       = $this->port;  
 		$mailer->Host       = $this->smtp;
 		$mailer->Username   = $this->email;
 		$mailer->Password   = $this->password;
